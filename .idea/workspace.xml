@@ -10,7 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="to LinearRegressionModel learn added minimum nTrain condition">
+    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="to LinearRegressionModel added self.learned condition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinearRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinearRegression.py" afterDir="false" />
     </list>
@@ -139,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608155903537</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="to LinearRegressionModel added self.learned condition">
+      <created>1608156336543</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608156336543</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -174,7 +181,8 @@
     <MESSAGE value="in LinearRegressionModel added getSampleSize method" />
     <MESSAGE value="added version and version comment" />
     <MESSAGE value="to LinearRegressionModel learn added minimum nTrain condition" />
-    <option name="LAST_COMMIT_MESSAGE" value="to LinearRegressionModel learn added minimum nTrain condition" />
+    <MESSAGE value="to LinearRegressionModel added self.learned condition" />
+    <option name="LAST_COMMIT_MESSAGE" value="to LinearRegressionModel added self.learned condition" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606679672840">
@@ -225,10 +233,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1882" height="344" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607630265325" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608155906906">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608157257798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608155906906" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608157257798" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608132410752">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

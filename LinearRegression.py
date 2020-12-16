@@ -89,6 +89,10 @@ class LinearRegressionModel(object):
         self.ccP = None
         self.cc = None
         self.learned = False
+        self.modelSampleSize = 0
+        self.initialShape = (0, 0)
+        self.testRMSE = None
+        self.testR2 = None
 
 
         self.allEmpty = []
