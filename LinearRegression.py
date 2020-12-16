@@ -58,7 +58,7 @@ class dataBuilder(object):
         intervals = []
         for feature in self.order:
             if feature in intervalDict:
-                intervals.append(intervalDict)
+                intervals.append(intervalDict[feature])
             else:
                 intervals.append((0,0))
         return intervals
