@@ -206,6 +206,9 @@ class LinearRegressionModel(object):
     def inverseTransformFun(self, value):
         return exp(self.scalerY.inverse_transform(value))
 
+    def getSampleSize(self):
+        return self.modelSampleSize
+
 
 
 class CrossValidationModel(object):

@@ -10,7 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="in dataBuilder corrected getIntervals method">
+    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="in LinearRegressionModel corrected getNormVal method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinearRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinearRegression.py" afterDir="false" />
     </list>
@@ -111,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608144227443</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="in LinearRegressionModel corrected getNormVal method">
+      <created>1608154566519</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1608154566520</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -142,7 +149,8 @@
     <MESSAGE value="minor update&#10;in dataBuilder added delSamples method&#10;in LinearRegressionModel added sampleSize attribute&#10;in LinearRegressionModel removed linear method&#10;in LinearRegressionModel removal of lrm. instead of self. bug" />
     <MESSAGE value="in dataBuilder added getIntervals method" />
     <MESSAGE value="in dataBuilder corrected getIntervals method" />
-    <option name="LAST_COMMIT_MESSAGE" value="in dataBuilder corrected getIntervals method" />
+    <MESSAGE value="in LinearRegressionModel corrected getNormVal method" />
+    <option name="LAST_COMMIT_MESSAGE" value="in LinearRegressionModel corrected getNormVal method" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606679672840">
