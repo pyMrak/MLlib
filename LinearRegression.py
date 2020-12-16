@@ -10,8 +10,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt, prod
 from scipy.stats import pearsonr
 
-version = '0.0.1'
-comment = 'Initial release'
+version = '0.0.2'
+comment = 'Added minimum nTrain condition'
 
 class dataBuilder(object):
     # object to transform dict with data to np.arrays for ml models
@@ -105,44 +105,45 @@ class LinearRegressionModel(object):
     def learn(self):
         # learn only if we added some samples
         if self.samplesX is not None:
-            nAll = len(self.samplesX)
-            nTest = int(nAll*self.testSize)
-            nTrain = nAll - nTest
             # shuffle samples: https://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html
             X, y = shuffle(self.samplesX, self.samplesY, random_state=0)
             fullIndices = where(X[:,0] != None)[0]
             X = X[fullIndices]
             y = y[fullIndices]
 
-            for i in range(X.shape[1]):
-                # find all features with all values equal to None and replace them with constant value 0
-                if X[:,i].any() == None:
-                    self.allEmpty.append(i)
-                    X[:, i] = zeros(X.shape[0])
-            # fill missing data with samples means
-            X = self.imputer.fit_transform(X)
-            # select only non constant features
-            X = self.featureSelector.fit_transform(X)
-            # scale data
-            X = self.scalerX.fit_transform(X)
-            y = self.transformFun(y)
-            # save the final model sample size
-            self.modelSampleSize = X.shape[0]
-            # fit model to data
-            self.linReg.fit(X[:-nTest], y[:-nTest])
-            # calculate predictions on test samples
-            yTest_pred = self.linReg.predict(X[-nTest:])
-            yTest = y[-nTest:]
-            self.cc = corrcoef(append(X, y, axis=1))
-            self.ccP = []
-            for i, x in enumerate(transpose(X)):
-                self.ccP.append(list(pearsonr(x, y[:,0])))
-            # calculate root mean squared error on test samples
-            self.ccP = array(self.ccP)[:,0]
-            self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
-            # calculate r2 on test samples
-            self.testR2 = r2_score(yTest, yTest_pred)
-            return self.testR2
+            nAll = len(self.samplesX)
+            nTest = int(nAll * self.testSize)
+            nTrain = nAll - nTest
+            if nTrain > 1.5*X.shape[1]:
+                for i in range(X.shape[1]):
+                    # find all features with all values equal to None and replace them with constant value 0
+                    if X[:,i].any() == None:
+                        self.allEmpty.append(i)
+                        X[:, i] = zeros(X.shape[0])
+                # fill missing data with samples means
+                X = self.imputer.fit_transform(X)
+                # select only non constant features
+                X = self.featureSelector.fit_transform(X)
+                # scale data
+                X = self.scalerX.fit_transform(X)
+                y = self.transformFun(y)
+                # save the final model sample size
+                self.modelSampleSize = X.shape[0]
+                # fit model to data
+                self.linReg.fit(X[:-nTest], y[:-nTest])
+                # calculate predictions on test samples
+                yTest_pred = self.linReg.predict(X[-nTest:])
+                yTest = y[-nTest:]
+                self.cc = corrcoef(append(X, y, axis=1))
+                self.ccP = []
+                for i, x in enumerate(transpose(X)):
+                    self.ccP.append(list(pearsonr(x, y[:,0])))
+                # calculate root mean squared error on test samples
+                self.ccP = array(self.ccP)[:,0]
+                self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
+                # calculate r2 on test samples
+                self.testR2 = r2_score(yTest, yTest_pred)
+                return self.testR2
         return None
 
     def predict(self, X):
