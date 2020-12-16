@@ -10,7 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="added dataBuilder, LinearRegressionModel and CrossValidationModel" />
+    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="added dataBuilder, LinearRegressionModel and CrossValidationModel">
+      <change beforePath="$PROJECT_DIR$/.idea/MLlib.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MLlib.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinearRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinearRegression.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606860493018</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added dataBuilder, LinearRegressionModel and CrossValidationModel">
+      <created>1608132472699</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608132472699</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -107,7 +118,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial release" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial release" />
+    <MESSAGE value="added dataBuilder, LinearRegressionModel and CrossValidationModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="added dataBuilder, LinearRegressionModel and CrossValidationModel" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606679672840">
@@ -158,14 +170,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1882" height="344" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607630265325" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608132390588">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608132683571">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608132390588" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608132683571" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608132410752">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608132410752" />
+    <state x="761" y="426" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1608132501506">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="761" y="426" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608132501506" />
     <state x="623" y="225" key="search.everywhere.popup" timestamp="1607161005562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -44,6 +44,10 @@ class dataBuilder(object):
             for sample in samples:
                 self.addSample(sample)
 
+    def delSamples(self):
+        self.featureArr = None
+        self.targetArr = None
+
     def getFeatureArr(self):
         return self.featureArr
 
@@ -77,9 +81,6 @@ class LinearRegressionModel(object):
 
 
         self.allEmpty = []
-
-    def linear(self, val):
-        return val
 
     def addSamples(self, samplesXarr, samplesYarr):
         fullIndices = where(samplesYarr!=None)[0]  # get samples indices which do not have empty target values
@@ -115,6 +116,8 @@ class LinearRegressionModel(object):
             # scale data
             X = self.scalerX.fit_transform(X)
             y = self.transformFun(y)
+            # save the final model sample size
+            self.modelSampleSize = X.shape[0]
             # fit model to data
             self.linReg.fit(X[:-nTest], y[:-nTest])
             # calculate predictions on test samples
@@ -145,13 +148,11 @@ class LinearRegressionModel(object):
 
     def getInfluenceFactors(self, norm=False):
         if norm: # if we want to normalize
-            coef = lrm.linReg.coef_[0]
-            #coef = lrm.linReg.regressor_.coef_  # get solution coefficients
+            coef = self.linReg.coef_[0]  # get solution coefficients
             sumCoef = sum(abs(coef))  # calculate their absolute sum
             coef = coef/sumCoef  # normalize them
         else:
-            coef = lrm.linReg.coef_[0]
-            #coef = lrm.linReg.regressor_.coef_  # get solution coefficients
+            coef = self.linReg.coef_[0]   # get solution coefficients
         i = 0  # for tracking indices of coeficients
         inflFac = []  # influence factor list
 
