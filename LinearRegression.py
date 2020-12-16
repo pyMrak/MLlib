@@ -10,7 +10,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt, prod
 from scipy.stats import pearsonr
 
-
+version = '0.0.1'
+comment = 'Initial release'
 
 class dataBuilder(object):
     # object to transform dict with data to np.arrays for ml models
