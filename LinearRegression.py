@@ -7,7 +7,7 @@ from sklearn.utils import shuffle
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.metrics import mean_squared_error, r2_score
 
-from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt
+from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt, prod
 from scipy.stats import pearsonr
 
 
@@ -179,22 +179,26 @@ class LinearRegressionModel(object):
         for i, interval in enumerate(featIntervals):
             intervalArr[0, i] = interval[0]
             intervalArr[1, i] = interval[1]
+        intervalArr = self.featureSelector.transform(intervalArr)
         intervalArr = self.scalerX.transform(intervalArr)
         # calculate norm value
         normVal = 0
+        k = 0
+        # print(self.getInfluenceFactors())
+        intgProd = prod(intervalArr[1] - intervalArr[0])
+        intervalArr = transpose(intervalArr)
         for i, inflFac in enumerate(self.getInfluenceFactors()):
-            if inflFac:  # if influence factor is not 0 (is included in the model) calculate partial
-                partialIntegralDown = inflFac
-                partialIntegralUp = inflFac
-                for j, interval in enumerate(transpose(intervalArr)):
-                    if j == i:
-                        partialIntegralDown *= interval[0]**2/2
-                        partialIntegralUp *= interval[1]**2/2
+            if inflFac:  # if influence factor is not 0 (is included in the model) calculate partial integral
+                partialIntegral = inflFac
+                for j, interval in enumerate(intervalArr):
+                    if j == i - k:
+                        partialIntegral *= (interval[1] ** 2 - interval[0] ** 2) / 2
                     else:
-                        partialIntegralDown *= interval[0]
-                        partialIntegralUp *= interval[1]
-                normVal += (partialIntegralUp - partialIntegralDown)/(interval[1] - interval[0])
-        return partialIntegralDown
+                        partialIntegral *= (interval[1] - interval[0])
+                normVal += partialIntegral / intgProd
+            else:
+                k += 1
+        return self.inverseTransformFun([[normVal]])[0][0]
 
     def transformFun(self, value):
         return self.scalerY.fit_transform(log(value))
