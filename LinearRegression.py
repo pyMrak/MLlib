@@ -10,8 +10,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt, prod
 from scipy.stats import pearsonr
 
-version = '0.0.2'
-comment = 'Added minimum nTrain condition'
+version = '0.0.3'
+comment = 'Added self.learned condition'
 
 class dataBuilder(object):
     # object to transform dict with data to np.arrays for ml models
@@ -88,6 +88,7 @@ class LinearRegressionModel(object):
         self.linReg = LinearRegression(fit_intercept=False)
         self.ccP = None
         self.cc = None
+        self.learned = False
 
 
         self.allEmpty = []
@@ -143,64 +144,71 @@ class LinearRegressionModel(object):
                 self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
                 # calculate r2 on test samples
                 self.testR2 = r2_score(yTest, yTest_pred)
+                self.learned = True
                 return self.testR2
         return None
 
     def predict(self, X):
-        # fill missing data with samples (train) means
-        X = self.imputer.transform(X)
-        #X[:, 0] = log(X[:, 0])
-        # select only non constant (train) features
-        X = self.featureSelector.transform(X)
-        # scale data
-        X = self.scalerX.transform(X)
-        # predict and return result
-        return self.inverseTransformFun(self.linReg.predict(X))
+        if self.learned:
+            # fill missing data with samples (train) means
+            X = self.imputer.transform(X)
+            #X[:, 0] = log(X[:, 0])
+            # select only non constant (train) features
+            X = self.featureSelector.transform(X)
+            # scale data
+            X = self.scalerX.transform(X)
+            # predict and return result
+            return self.inverseTransformFun(self.linReg.predict(X))
+        return None
 
     def getInfluenceFactors(self, norm=False):
-        if norm: # if we want to normalize
-            coef = self.linReg.coef_[0]  # get solution coefficients
-            sumCoef = sum(abs(coef))  # calculate their absolute sum
-            coef = coef/sumCoef  # normalize them
-        else:
-            coef = self.linReg.coef_[0]   # get solution coefficients
-        i = 0  # for tracking indices of coeficients
-        inflFac = []  # influence factor list
+        if self.learned:
+            if norm: # if we want to normalize
+                coef = self.linReg.coef_[0]  # get solution coefficients
+                sumCoef = sum(abs(coef))  # calculate their absolute sum
+                coef = coef/sumCoef  # normalize them
+            else:
+                coef = self.linReg.coef_[0]   # get solution coefficients
+            i = 0  # for tracking indices of coeficients
+            inflFac = []  # influence factor list
 
-        for selected in self.featureSelector.get_support():  # iterate trough featureSelector selection
-            if selected:  # if feature was included in the model add its coefficient to the influence factor list
-                inflFac.append(coef[i])
-                i += 1  # update i
-            else:  # if feature was not included set its influence factor to zero
-                inflFac.append(0)
-        return inflFac
+            for selected in self.featureSelector.get_support():  # iterate trough featureSelector selection
+                if selected:  # if feature was included in the model add its coefficient to the influence factor list
+                    inflFac.append(coef[i])
+                    i += 1  # update i
+                else:  # if feature was not included set its influence factor to zero
+                    inflFac.append(0)
+            return inflFac
+        return None
 
     def getNormVal(self, featIntervals):
-        # transform featIntervals with X scaler
-        intervalArr = zeros((2, len(featIntervals)))
-        for i, interval in enumerate(featIntervals):
-            intervalArr[0, i] = interval[0]
-            intervalArr[1, i] = interval[1]
-        intervalArr = self.featureSelector.transform(intervalArr)
-        intervalArr = self.scalerX.transform(intervalArr)
-        # calculate norm value
-        normVal = 0
-        k = 0
-        # print(self.getInfluenceFactors())
-        intgProd = prod(intervalArr[1] - intervalArr[0])
-        intervalArr = transpose(intervalArr)
-        for i, inflFac in enumerate(self.getInfluenceFactors()):
-            if inflFac:  # if influence factor is not 0 (is included in the model) calculate partial integral
-                partialIntegral = inflFac
-                for j, interval in enumerate(intervalArr):
-                    if j == i - k:
-                        partialIntegral *= (interval[1] ** 2 - interval[0] ** 2) / 2
-                    else:
-                        partialIntegral *= (interval[1] - interval[0])
-                normVal += partialIntegral / intgProd
-            else:
-                k += 1
-        return self.inverseTransformFun([[normVal]])[0][0]
+        if self.learned:
+            # transform featIntervals with X scaler
+            intervalArr = zeros((2, len(featIntervals)))
+            for i, interval in enumerate(featIntervals):
+                intervalArr[0, i] = interval[0]
+                intervalArr[1, i] = interval[1]
+            intervalArr = self.featureSelector.transform(intervalArr)
+            intervalArr = self.scalerX.transform(intervalArr)
+            # calculate norm value
+            normVal = 0
+            k = 0
+            # print(self.getInfluenceFactors())
+            intgProd = prod(intervalArr[1] - intervalArr[0])
+            intervalArr = transpose(intervalArr)
+            for i, inflFac in enumerate(self.getInfluenceFactors()):
+                if inflFac:  # if influence factor is not 0 (is included in the model) calculate partial integral
+                    partialIntegral = inflFac
+                    for j, interval in enumerate(intervalArr):
+                        if j == i - k:
+                            partialIntegral *= (interval[1] ** 2 - interval[0] ** 2) / 2
+                        else:
+                            partialIntegral *= (interval[1] - interval[0])
+                    normVal += partialIntegral / intgProd
+                else:
+                    k += 1
+            return self.inverseTransformFun([[normVal]])[0][0]
+        return None
 
     def transformFun(self, value):
         return self.scalerY.fit_transform(log(value))
