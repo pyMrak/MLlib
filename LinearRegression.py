@@ -54,6 +54,15 @@ class dataBuilder(object):
     def getTargetArr(self):
         return self.targetArr
 
+    def getIntervals(self, intervalDict):
+        intervals = []
+        for feature in self.order:
+            if feature in intervalDict:
+                intervals.append(intervalDict)
+            else:
+                intervals.append((0,0))
+        return intervals
+
 
 
 class LinearRegressionModel(object):
