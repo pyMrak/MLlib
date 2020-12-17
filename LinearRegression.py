@@ -13,7 +13,9 @@ from scipy.stats import pearsonr
 version = '0.0.3'
 comment = 'Added self.learned condition'
 
-class dataBuilder(object):
+
+class DataBuilder(object):
+
     # object to transform dict with data to np.arrays for ml models
     def __init__(self, target, order):
         self.target = target  # define target
@@ -61,9 +63,8 @@ class dataBuilder(object):
             if feature in intervalDict:
                 intervals.append(intervalDict[feature])
             else:
-                intervals.append((0,0))
+                intervals.append((0, 0))
         return intervals
-
 
 
 class LinearRegressionModel(object):
@@ -93,12 +94,10 @@ class LinearRegressionModel(object):
         self.initialShape = (0, 0)
         self.testRMSE = None
         self.testR2 = None
-
-
         self.allEmpty = []
 
     def addSamples(self, samplesXarr, samplesYarr):
-        fullIndices = where(samplesYarr!=None)[0]  # get samples indices which do not have empty target values
+        fullIndices = where(samplesYarr != None)[0]  # get samples indices which do not have empty target values
         if self.samplesX:  # if we have some samples stored already append to the samplesXarr and samplesYarr arrays
             self.samplesX = append(self.samplesX, samplesXarr[fullIndices], axis=0)
             self.samplesY = append(self.samplesX, samplesYarr[fullIndices], axis=0)
@@ -112,7 +111,7 @@ class LinearRegressionModel(object):
         if self.samplesX is not None:
             # shuffle samples: https://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html
             X, y = shuffle(self.samplesX, self.samplesY, random_state=0)
-            fullIndices = where(X[:,0] != None)[0]
+            fullIndices = where(X[:, 0] != None)[0]
             X = X[fullIndices]
             y = y[fullIndices]
 
@@ -122,7 +121,7 @@ class LinearRegressionModel(object):
             if nTrain > 1.5*X.shape[1]:
                 for i in range(X.shape[1]):
                     # find all features with all values equal to None and replace them with constant value 0
-                    if X[:,i].any() == None:
+                    if X[:, i].any() == None:
                         self.allEmpty.append(i)
                         X[:, i] = zeros(X.shape[0])
                 # fill missing data with samples means
@@ -142,10 +141,10 @@ class LinearRegressionModel(object):
                 self.cc = corrcoef(append(X, y, axis=1))
                 self.ccP = []
                 for i, x in enumerate(transpose(X)):
-                    self.ccP.append(list(pearsonr(x, y[:,0])))
+                    self.ccP.append(list(pearsonr(x, y[:, 0])))
                 # calculate root mean squared error on test samples
-                self.ccP = array(self.ccP)[:,0]
-                self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
+                self.ccP = array(self.ccP)[:, 0]
+                self.testRMSE = self.inverseTransformFun([[sqrt(mean_squared_error(yTest, yTest_pred))]])[0, 0]
                 # calculate r2 on test samples
                 self.testR2 = r2_score(yTest, yTest_pred)
                 self.learned = True
@@ -156,7 +155,6 @@ class LinearRegressionModel(object):
         if self.learned:
             # fill missing data with samples (train) means
             X = self.imputer.transform(X)
-            #X[:, 0] = log(X[:, 0])
             # select only non constant (train) features
             X = self.featureSelector.transform(X)
             # scale data
@@ -167,12 +165,12 @@ class LinearRegressionModel(object):
 
     def getInfluenceFactors(self, norm=False):
         if self.learned:
-            if norm: # if we want to normalize
+            if norm:  # if we want to normalize
                 coef = self.linReg.coef_[0]  # get solution coefficients
                 sumCoef = sum(abs(coef))  # calculate their absolute sum
                 coef = coef/sumCoef  # normalize them
             else:
-                coef = self.linReg.coef_[0]   # get solution coefficients
+                coef = self.linReg.coef_[0]  # get solution coefficients
             i = 0  # for tracking indices of coeficients
             inflFac = []  # influence factor list
 
@@ -224,7 +222,6 @@ class LinearRegressionModel(object):
         return self.modelSampleSize
 
 
-
 class CrossValidationModel(object):
 
     def __init__(self, strategy='mean', testSize=0.3):
@@ -245,11 +242,13 @@ class CrossValidationModel(object):
         # https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
         # https://stackoverflow.com/questions/38058774/scikit-learn-how-to-scale-back-the-y-predicted-result
         self.linReg = LinearRegression(fit_intercept=False)
-
+        self.initialShape = ()
+        self.ccP = []
+        self.testR2 = None
         self.allEmpty = []
 
     def addSamples(self, samplesXarr, samplesYarr):
-        fullIndices = where(samplesYarr!=None)[0]  # get samples indices which do not have empty target values
+        fullIndices = where(samplesYarr != None)[0]  # get samples indices which do not have empty target values
         if self.samplesX:  # if we have some samples stored already append to the samplesXarr and samplesYarr arrays
             self.samplesX = append(self.samplesX, samplesXarr[fullIndices], axis=0)
             self.samplesY = append(self.samplesX, samplesYarr[fullIndices], axis=0)
@@ -266,12 +265,12 @@ class CrossValidationModel(object):
             nTrain = nAll - nTest
             # shuffle samples: https://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html
             X, y = shuffle(self.samplesX, self.samplesY, random_state=0)
-            fullIndices = where(X[:,0] != None)[0]
+            fullIndices = where(X[:, 0] != None)[0]
             X = X[fullIndices]
             y = y[fullIndices]
             # find all features with all values equal to None and replace them with constant value 0
             for i in range(X.shape[1]):
-                if X[:,i].any() == None:
+                if X[:, i].any() == None:
                     self.allEmpty.append(i)
                     X[:, i] = zeros(X.shape[0])
             # fill missing data with samples means
@@ -283,16 +282,15 @@ class CrossValidationModel(object):
             y = self.transformFun(y)
             # fit model to data
             self.linReg.fit(X[:-nTest], y[:-nTest])
-            self.cc = corrcoef(append(X, y, axis=1))
+            # self.cc = corrcoef(append(X, y, axis=1))
             # get Pearsons correlation coefficient
-            self.ccP = []
             for i, x in enumerate(transpose(X)):
-                self.ccP.append(list(pearsonr(x, y[:,0])))
+                self.ccP.append(list(pearsonr(x, y[:, 0])))
             self.ccP = array(self.ccP)[:, 0]
             # get scores from cross validation
             scores = cross_validate(self.linReg, X, y, cv=10,
-                            scoring = ('r2', 'neg_mean_squared_error'),
-                            return_train_score = True)
+                                    scoring=('r2', 'neg_mean_squared_error'),
+                                    return_train_score=True)
             self.testR2 = scores['test_r2'].mean()
             return self.testR2
         return None
@@ -303,7 +301,7 @@ class CrossValidationModel(object):
             sumCoef = sum(abs(coef))  # calculate their absolute sum
             coef = coef/sumCoef  # normalize them
         else:
-            coef = self.linReg.coef_[0]# get solution coefficients
+            coef = self.linReg.coef_[0]  # get solution coefficients
         i = 0  # for tracking indices of coefficients
         inflFac = []  # influence factor list
         for selected in self.featureSelector.get_support():  # iterate trough featureSelector selection
@@ -312,7 +310,7 @@ class CrossValidationModel(object):
                 i += 1  # update i
             else:  # if feature was not included set its influence factor to zero
                 inflFac.append(0)
-        return inflFac#All
+        return inflFac
 
     def transformFun(self, value):
         return self.scalerY.fit_transform(log(value))
