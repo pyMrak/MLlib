@@ -116,7 +116,7 @@ class LinearRegressionModel(object):
             X = X[fullIndices]
             y = y[fullIndices]
 
-            nAll = len(self.samplesX)
+            nAll = X.shape[0]
             nTest = int(nAll * self.testSize)
             nTrain = nAll - nTest
             if nTrain > 1.5*X.shape[1]:
@@ -133,7 +133,7 @@ class LinearRegressionModel(object):
                 X = self.scalerX.fit_transform(X)
                 y = self.transformFun(y)
                 # save the final model sample size
-                self.modelSampleSize = X.shape[0]
+                self.modelSampleSize = nAll
                 # fit model to data
                 self.linReg.fit(X[:-nTest], y[:-nTest])
                 # calculate predictions on test samples
