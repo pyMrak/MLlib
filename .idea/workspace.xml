@@ -10,8 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="to LinearRegressionModel.__init__ added some attributes">
+    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinearRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinearRegression.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608210226211</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code">
+      <created>1608229766642</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1608229766642</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -196,7 +204,8 @@
     <MESSAGE value="to LinearRegressionModel learn added minimum nTrain condition" />
     <MESSAGE value="to LinearRegressionModel added self.learned condition" />
     <MESSAGE value="to LinearRegressionModel.__init__ added some attributes" />
-    <option name="LAST_COMMIT_MESSAGE" value="to LinearRegressionModel.__init__ added some attributes" />
+    <MESSAGE value="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606679672840">
@@ -247,10 +256,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1882" height="344" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607630265325" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608210228152">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608229769300">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608210228152" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608229769300" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608132410752">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

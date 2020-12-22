@@ -136,15 +136,15 @@ class LinearRegressionModel(object):
                 # fit model to data
                 self.linReg.fit(X[:-nTest], y[:-nTest])
                 # calculate predictions on test samples
-                yTest_pred = self.linReg.predict(X[-nTest:])
-                yTest = y[-nTest:]
+                yTest_pred = self.inverseTransformFun(self.linReg.predict(X[-nTest:]))
+                yTest = self.inverseTransformFun(y[-nTest:])
                 self.cc = corrcoef(append(X, y, axis=1))
                 self.ccP = []
                 for i, x in enumerate(transpose(X)):
                     self.ccP.append(list(pearsonr(x, y[:, 0])))
                 # calculate root mean squared error on test samples
                 self.ccP = array(self.ccP)[:, 0]
-                self.testRMSE = self.inverseTransformFun([[sqrt(mean_squared_error(yTest, yTest_pred))]])[0, 0]
+                self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
                 # calculate r2 on test samples
                 self.testR2 = r2_score(yTest, yTest_pred)
                 self.learned = True
