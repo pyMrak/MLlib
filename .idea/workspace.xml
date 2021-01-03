@@ -10,7 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code">
+    <list default="true" id="bcfcddf9-4085-46da-bffc-b97ff94ecb2c" name="Default Changelist" comment="correcterd the RMSE definition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinearRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinearRegression.py" afterDir="false" />
     </list>
@@ -37,9 +37,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BolhaReader/conf.py" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.mailer">
     <configuration name="LinearRegression" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MLlib" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -61,8 +61,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="mailer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MLlib" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../BolhaReader" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../BolhaReader/mailer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mailer" />
         <item itemvalue="Python.LinearRegression" />
       </list>
     </recent_temporary>
@@ -167,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608229766642</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="correcterd the RMSE definition">
+      <created>1608648318206</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1608648318206</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -205,7 +234,8 @@
     <MESSAGE value="to LinearRegressionModel added self.learned condition" />
     <MESSAGE value="to LinearRegressionModel.__init__ added some attributes" />
     <MESSAGE value="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes&#10;to CrossValidationModel.__init__ added some attributes&#10;in LinearRegressionModel.learn changed self.testR2 definition&#10;edited code" />
+    <MESSAGE value="correcterd the RMSE definition" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcterd the RMSE definition" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606679672840">
@@ -216,30 +246,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608132000710" />
-    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1606679742092">
+    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1609586904905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606679742092" />
+    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609586904905" />
     <state x="838" y="418" key="Github.ShareDialog" timestamp="1608132180923">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="838" y="418" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608132180923" />
-    <state width="1899" height="279" key="GridCell.Tab.0.bottom" timestamp="1608132425151">
+    <state width="949" height="279" key="GridCell.Tab.0.bottom" timestamp="1609589074120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608132425151" />
-    <state width="1899" height="279" key="GridCell.Tab.0.center" timestamp="1608132425151">
+    <state width="949" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609589074120" />
+    <state width="949" height="279" key="GridCell.Tab.0.center" timestamp="1609589074119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608132425151" />
-    <state width="1899" height="279" key="GridCell.Tab.0.left" timestamp="1608132425151">
+    <state width="949" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609589074119" />
+    <state width="949" height="279" key="GridCell.Tab.0.left" timestamp="1609589074119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608132425151" />
-    <state width="1899" height="279" key="GridCell.Tab.0.right" timestamp="1608132425151">
+    <state width="949" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609589074119" />
+    <state width="949" height="279" key="GridCell.Tab.0.right" timestamp="1609589074119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608132425151" />
+    <state width="949" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609589074119" />
     <state width="1882" height="344" key="GridCell.Tab.1.bottom" timestamp="1607630265325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -256,10 +286,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1882" height="344" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607630265325" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608229769300">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608648357863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608229769300" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608648357863" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608132410752">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

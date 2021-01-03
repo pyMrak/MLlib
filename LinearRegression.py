@@ -130,6 +130,7 @@ class LinearRegressionModel(object):
                 X = self.featureSelector.fit_transform(X)
                 # scale data
                 X = self.scalerX.fit_transform(X)
+                yTest = y[-nTest:]
                 y = self.transformFun(y)
                 # save the final model sample size
                 self.modelSampleSize = nAll
@@ -137,7 +138,6 @@ class LinearRegressionModel(object):
                 self.linReg.fit(X[:-nTest], y[:-nTest])
                 # calculate predictions on test samples
                 yTest_pred = self.inverseTransformFun(self.linReg.predict(X[-nTest:]))
-                yTest = self.inverseTransformFun(y[-nTest:])
                 self.cc = corrcoef(append(X, y, axis=1))
                 self.ccP = []
                 for i, x in enumerate(transpose(X)):
@@ -196,7 +196,7 @@ class LinearRegressionModel(object):
             normVal = 0
             k = 0
             # print(self.getInfluenceFactors())
-            intgProd = prod(intervalArr[1] - intervalArr[0])
+            intgProd = prod(intervalArr[1] - intervalArr[0]) # TODO remove redundant operations
             intervalArr = transpose(intervalArr)
             for i, inflFac in enumerate(self.getInfluenceFactors()):
                 if inflFac:  # if influence factor is not 0 (is included in the model) calculate partial integral
@@ -205,7 +205,7 @@ class LinearRegressionModel(object):
                         if j == i - k:
                             partialIntegral *= (interval[1] ** 2 - interval[0] ** 2) / 2
                         else:
-                            partialIntegral *= (interval[1] - interval[0])
+                            partialIntegral *= (interval[1] - interval[0])  # TODO remove redundant operations
                     normVal += partialIntegral / intgProd
                 else:
                     k += 1
