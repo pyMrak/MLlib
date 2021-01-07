@@ -7,7 +7,7 @@ from sklearn.utils import shuffle
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.metrics import mean_squared_error, r2_score
 
-from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, sqrt, prod
+from numpy import append, nan, where, array, log, exp, corrcoef, transpose, zeros, ones, sqrt, prod
 from scipy.stats import pearsonr
 
 version = '0.0.3'
@@ -136,18 +136,31 @@ class LinearRegressionModel(object):
                 self.modelSampleSize = nAll
                 # fit model to data
                 self.linReg.fit(X[:-nTest], y[:-nTest])
+                self.learned = True
                 # calculate predictions on test samples
-                yTest_pred = self.inverseTransformFun(self.linReg.predict(X[-nTest:]))
+                predRaw = self.linReg.predict(X[-nTest:])
+                if max(predRaw) > 11:
+                    tooLarge = where(predRaw > 11)[0]
+                    predRaw[tooLarge] = ones(tooLarge.shape)*11
+                yTest_pred = self.inverseTransformFun(predRaw)
+
                 self.cc = corrcoef(append(X, y, axis=1))
                 self.ccP = []
                 for i, x in enumerate(transpose(X)):
                     self.ccP.append(list(pearsonr(x, y[:, 0])))
                 # calculate root mean squared error on test samples
                 self.ccP = array(self.ccP)[:, 0]
-                self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
+
+                try:
+                    self.testRMSE = sqrt(mean_squared_error(yTest, yTest_pred))
+                except Exception as e:
+                    print(yTest_pred)
+                    print(self.linReg.predict(X[-nTest:]))
+                    print(X[-nTest:])
+                    raise ValueError(e)
                 # calculate r2 on test samples
                 self.testR2 = r2_score(yTest, yTest_pred)
-                self.learned = True
+
                 return self.testR2
         return None
 
