@@ -141,7 +141,7 @@ class LinearRegressionModel(object):
                 predRaw = self.linReg.predict(X[-nTest:])
                 if max(predRaw) > 11:
                     tooLarge = where(predRaw > 11)[0]
-                    predRaw[tooLarge] = ones(tooLarge.shape)*11
+                    predRaw[tooLarge] = ones((tooLarge.shape[0],1 ))*13
                 yTest_pred = self.inverseTransformFun(predRaw)
 
                 self.cc = corrcoef(append(X, y, axis=1))
